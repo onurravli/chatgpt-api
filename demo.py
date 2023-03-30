@@ -1,5 +1,5 @@
 from chatgpt import ChatGPT
-from dotenv import load_dotenv  # It doesn't necessary if you don't use env variables.
+from dotenv import load_dotenv # Just for env. variables.
 import os
 
 load_dotenv()
