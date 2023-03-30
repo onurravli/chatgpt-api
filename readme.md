@@ -1,6 +1,6 @@
 ## ChatGPT API (Unofficial)
 
-A simple ChatGPT API client written in Python.
+A simple ChatGPT API client written in Python. *Requires an API key. If you don't have any, you can subscribe to OpenAI from [here](https://openai.com/).*
 
 ### Usage
 
