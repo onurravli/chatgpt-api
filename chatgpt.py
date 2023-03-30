@@ -36,7 +36,7 @@ class ChatGPT:
             resp = requests.post(url, headers=headers, data=json.dumps(data))
             return json.loads(resp.text)["choices"][0]["message"]["content"]
         except KeyError:
-            return json.loads('{"Error": "An key error occurred."}')
+            return json.loads('{"Error": "A key error occurred."}')
         except:
             return json.loads('{"Error": "An unknown error occurred."}')
 
