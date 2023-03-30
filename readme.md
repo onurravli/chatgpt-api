@@ -6,7 +6,7 @@ A simple ChatGPT API client written in Python. *Requires an API key. If you don'
 
 ```py
 from chatgpt import ChatGPT # Make sure the runner code and chatgpt.py file are under the same directory.
-from dotenv import load_dotenv  # It doesn't necessary if you don't use env variables.
+from dotenv import load_dotenv  # It isn't necessary if you don't use env variables.
 import os
 
 load_dotenv()
