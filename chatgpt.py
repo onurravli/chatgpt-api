@@ -36,7 +36,8 @@ class ChatGPT:
             resp = requests.post(url, headers=headers, data=json.dumps(data))
             tokens = json.loads(resp.text)["usage"]["total_tokens"]
             return (
-                json.loads(resp.text)["choices"][0]["message"]["content"] + f" ({tokens})"
+                json.loads(resp.text)["choices"][0]["message"]["content"]
+                + f" ({tokens})"
             )
         except KeyError:
             return json.loads('{"Error": "A key error occurred."}')
@@ -54,6 +55,7 @@ class ChatGPT:
         try:
             question = input(colors.HEADER + "Q: " + colors.ENDC)
             if question == "!exit":
+                print(colors.WARNING + f"Exiting" + colors.ENDC)
                 sys.exit(0)
             print(colors.OKBLUE + "A: " + colors.ENDC, end="")
             resp = ""
