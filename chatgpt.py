@@ -35,10 +35,7 @@ class ChatGPT:
         try:
             resp = requests.post(url, headers=headers, data=json.dumps(data))
             tokens = json.loads(resp.text)["usage"]["total_tokens"]
-            return (
-                json.loads(resp.text)["choices"][0]["message"]["content"]
-                + f" ({tokens})"
-            )
+            return json.loads(resp.text)["choices"][0]["message"]["content"]
         except KeyError:
             return json.loads('{"Error": "A key error occurred."}')
         except:
@@ -52,8 +49,23 @@ class ChatGPT:
         print("")
 
     def chat(self, *args):
+        input_text = colors.HEADER + "Q: " + colors.ENDC
         try:
-            question = input(colors.HEADER + "Q: " + colors.ENDC)
+            question = input(input_text)
+            if question[0] == "@" and question[-1] == "@":
+                prompt = question.replace("@", "").replace("@", "")
+                req = requests.get(
+                    f"https://awesome-chatgpt-prompts-api.vercel.app/act/{prompt}"
+                )
+                try:
+                    question = json.loads(req.text)["prompt"]
+                except KeyError:
+                    print(
+                        colors.UNDERLINE
+                        + "Error: This prompt doesn't exist."
+                        + colors.ENDC
+                    )
+
             if question == "!exit":
                 print(colors.WARNING + f"Exiting" + colors.ENDC)
                 sys.exit(0)
@@ -67,7 +79,7 @@ class ChatGPT:
                     else "assistant"
                 )
                 temp: float = (
-                    args[2] if (len(args) > 3 and args[2] != (None or "")) else 0.5
+                    args[2] if (len(args) > 3 and args[2] != (None or "")) else 1
                 )
                 try:
                     resp = self.send(model, question, role, temp)
